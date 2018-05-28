@@ -1,0 +1,17 @@
+{
+  "name": "mars",
+  "version": "1.0.0",
+  "description": "Solve challenge MARS",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sach2211",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3",
+    "memory-cache": "^0.2.0",
+    "random-token": "0.0.8",
+    "superagent": "^3.8.3"
+  }
+}
