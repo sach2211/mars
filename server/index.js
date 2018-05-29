@@ -8,17 +8,19 @@ const randomToken = require('random-token');
 const { verifyPassword, persistTokenForUser, verifyToken } = require('./cache');
 const mockData = require('../mock-data.json')
 
-
+// parse req body
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   res.send('Hello World');
 })
 
+// Health check route
 app.get('/ping', (req, res) => {
   res.send('pong');
 })
 
+// login route
 app.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -48,7 +50,7 @@ app.post("/login", (req, res) => {
 
 });
 
-
+// supply data to user if correct token is supplied
 app.get('/data', (req, res) => {
   const postedToken = req.headers.auth;
   const validity = verifyToken(postedToken);
