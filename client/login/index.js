@@ -1,6 +1,6 @@
 import React from 'react';
 import agent from 'superagent';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import './login.css';
 
 export class Login extends React.Component {
@@ -19,7 +19,7 @@ export class Login extends React.Component {
     .then( (r) => {
       if (r.body && r.body.token) {
         window.__mars_token__ = r.body.token;
-        <Redirect to='/data' />
+        this.props.history.push('/data');
       }
     })
     .catch( e => {
@@ -49,4 +49,4 @@ export class Login extends React.Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);
