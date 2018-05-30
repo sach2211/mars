@@ -1,0 +1,28 @@
+.dataTable {
+  width: 1200px;
+  border: 1px solid darkmagenta;
+}
+
+.tableHeaders {
+  text-align: left;
+}
+
+.tableRow {
+  border: 1px solid grey;
+}
+
+.tableDescription {
+  width: 40%;
+}
+
+.tableName {
+  width: 20%;
+}
+
+.tableId .tableRating {
+  width: 5%;
+}
+
+.rateStars {
+  width: 30px;
+}

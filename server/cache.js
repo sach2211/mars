@@ -2,7 +2,7 @@ const db = require('memory-cache');
 
 function verifyPassword(email, password) {
   return new Promise( (resolve, reject) => {
-    if (email === 'sachin.chopra2211@gmail.com' && password === 'mars123') {
+    if (email === 'sachin' && password === 'mars') {
       resolve('OK');
     } else {
       resolve('NOT OK');
