@@ -35,9 +35,11 @@ export class Table extends React.Component {
           <thead>
             <tr>
               <th className='tableHeaders' > No. </th>
+              <th className='tableHeaders'> Photo </th>
               <th className='tableHeaders'> Name </th>
               <th className='tableHeaders'> Description </th>
               <th className='tableHeaders'> Rating </th>
+              <th className='tableHeaders'> Tags </th>
             </tr>
           </thead>
           <tbody>
@@ -46,9 +48,11 @@ export class Table extends React.Component {
               thisRow.isActive ? (
               <tr key={`d-${id}`} className='tableRow'>
                 <td className='tableId'> {id + 1} </td>
+                <td className='tableThumbnail'> <img src={thisRow.image} /> </td>
                 <td className='tableName' > {thisRow.name} </td>
                 <td className='tableDescription'> {thisRow.description} </td>
                 <Ratings rating={thisRow.rating} />
+                <Tags tag={thisRow.tags} />
               </tr>
               ) : (
                 null
@@ -69,5 +73,12 @@ const Ratings = (props) => {
   const stars = new Array(rating).fill(0);
   return stars.map(() => (
     <img src={star} className='rateStars'/>
+  ))
+};
+
+const Tags = (props) => {
+  const tag = props.tag || [];
+  return tag.map((x) => (
+    <span> {`#${x}`} </span>
   ))
 };
