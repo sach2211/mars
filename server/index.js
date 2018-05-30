@@ -3,16 +3,19 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const randomToken = require('random-token');
+const cors = require('cors');
+const path = require('path');
 
 // internal modules
 const { verifyPassword, persistTokenForUser, verifyToken } = require('./cache');
 const mockData = require('../mock-data.json')
 
-// parse req body
+app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', (req, res) => {
-  res.send('Hello World');
+  res.sendFile (path.join(__dirname, '../public/index.html'));
 })
 
 // Health check route

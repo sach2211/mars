@@ -2,13 +2,13 @@
   "name": "mars",
   "version": "1.0.0",
   "description": "Solve challenge MARS",
-  "engines" : { 
-    "node" : ">=8.4.0" 
+  "engines": {
+    "node": ">=8.4.0"
   },
   "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
+    "build": "webpack && node server/index.js",
     "dev-build": "webpack-serve && node server/index.js"
   },
   "author": "sach2211",
@@ -19,6 +19,7 @@
     "random-token": "0.0.8",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+    "react-router-dom": "^4.2.2",
     "superagent": "^3.8.3"
   },
   "devDependencies": {
@@ -29,6 +30,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "cors": "^2.8.4",
     "css-loader": "^0.28.11",
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.21.0",
