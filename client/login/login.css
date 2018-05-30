@@ -1,0 +1,21 @@
+.loginBox {
+  position: absolute;
+  width: 500px;  
+  top: 30%;
+  left: 30%;
+  border: 1px dotted grey;
+}
+
+.submitButton {
+  width: 100%;
+  font-size: 22px;
+  background-color: lightblue;
+}
+
+.loginFormHeader {
+}
+
+.formInputs {
+  width: 100%;
+  font-size: 22px;
+}
