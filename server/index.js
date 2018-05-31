@@ -61,7 +61,7 @@ app.get('/data', (req, res) => {
   if (validity)
     res.send(mockData);
   else
-    res.status(401).send('Unauthorized');
+    res.redirect('/login');
 });
 
 app.get('*', (req, res) => {
