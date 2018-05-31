@@ -15,12 +15,16 @@
   width: 40%;
 }
 
-.tableName {
+.tableName .tableRatings{
   width: 20%;
 }
 
 .tableId .tableRating {
   width: 5%;
+}
+
+.tableTags {
+  width: 10%;
 }
 
 .rateStars {

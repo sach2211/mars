@@ -1,5 +1,6 @@
 import React from 'react'
 import agent from 'superagent';
+import { withRouter } from 'react-router-dom';
 import './table.css';
 import star from '../../assets/star.svg';
 
@@ -8,7 +9,10 @@ export class Table extends React.Component {
   constructor() {
     super();
     this.state = {
-      data: []
+      data: [],
+      sortedData: [],
+      sortBy: 'no', // can be ['no', 'rating']
+      sortOrder: true // can be true or false => ascending or descending
     }
   }
 
@@ -19,13 +23,29 @@ export class Table extends React.Component {
       .get('/data')
       .set({ auth:  authToken})
       .then( x => {
-        this.setState({ data: x.body })
+        this.setState({ data: x.body, sortedData: x.body })
       })
+    } else {
+      this.props.history.push('/login');
     }
   }
 
   componentDidMount() {
-    this.fetchData()
+    this.fetchData();
+  }
+
+  sortEntries(col) {
+    const sortCol = col;
+    let sortOrd = true;
+
+    if (this.state.sortBy === sortCol) {
+      sortOrd = !this.state.sortOrder;
+    }
+
+    const sortedData = this.state.data.slice().sort((thisRow, nextRow) => (
+      (nextRow.rating - thisRow.rating) * (sortOrd ? -1 : 1)
+    ));
+    this.setState({ sortedData: sortedData, sortBy: sortCol, sortOrder: sortOrd });
   }
 
   render() {
@@ -38,21 +58,25 @@ export class Table extends React.Component {
               <th className='tableHeaders'> Photo </th>
               <th className='tableHeaders'> Name </th>
               <th className='tableHeaders'> Description </th>
-              <th className='tableHeaders'> Rating </th>
+              <th className='tableHeaders' onClick={ () => this.sortEntries('ratings') }> Rating </th>
               <th className='tableHeaders'> Tags </th>
             </tr>
           </thead>
           <tbody>
           {
-            this.state.data.map((thisRow, id) => (
+            this.state.sortedData.map((thisRow, id) => (
               thisRow.isActive ? (
               <tr key={`d-${id}`} className='tableRow'>
                 <td className='tableId'> {id + 1} </td>
                 <td className='tableThumbnail'> <img src={thisRow.image} /> </td>
                 <td className='tableName' > {thisRow.name} </td>
                 <td className='tableDescription'> {thisRow.description} </td>
-                <Ratings rating={thisRow.rating} />
-                <Tags tag={thisRow.tags} />
+                <td className='tableRatings'> 
+                  <Ratings rating={thisRow.rating} />
+                </td>
+                <td className='tableTags'>
+                  <Tags tag={thisRow.tags} />
+                </td>
               </tr>
               ) : (
                 null
@@ -66,7 +90,7 @@ export class Table extends React.Component {
   }
 };
 
-export default Table;
+export default withRouter(Table);
 
 const Ratings = (props) => {
   const rating = Number.parseInt(props.rating);
