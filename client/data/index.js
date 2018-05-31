@@ -58,9 +58,8 @@ export class Table extends React.Component {
     const markUp = [];
     for (let i = start; i < data.length && i < end; i++) {
       let thisListing = null, thisRow = data[i];
-      if (data[i].isActive) {
         thisListing = (
-          <tr key={`d-${i}`} className='tableRow'>
+          <tr key={`d-${i}`} className='tableRow' className='inactiveListing'>
             <td className='tableId'> {i + 1} </td>
             <td className='tableThumbnail'> <img src={thisRow.image} /> </td>
             <td className='tableName' ><h3> {thisRow.name} </h3></td>
@@ -73,7 +72,6 @@ export class Table extends React.Component {
             </td>
           </tr>
         );
-      }
       markUp.push(thisListing);
     }
     return markUp;
@@ -82,23 +80,29 @@ export class Table extends React.Component {
   render() {
     return(
       <div>
-        <table className='dataTable'>
-          <thead>
-            <tr>
-              <th className='tableHeaders' > No. </th>
-              <th className='tableHeaders'> Photo </th>
-              <th className='tableHeaders'> Name </th>
-              <th className='tableHeaders'> Description </th>
-              <th className='tableHeaders' onClick={ () => this.sortEntries('ratings') }> Rating </th>
-              <th className='tableHeaders'> Tags </th>
-            </tr>
-          </thead>
           <Paginator
-            render= { (start, end) => (
-              this.generateTableJSX(this.state.sortedData, start, end)
+            render= { (start, end, nextPage, previousPage) => (
+              <div>
+                <button onClick={previousPage}> Prev </button>
+                <table className='dataTable'>
+                <thead>
+                  <tr>
+                    <th className='tableHeaders' > No. </th>
+                    <th className='tableHeaders'> Photo </th>
+                    <th className='tableHeaders'> Name </th>
+                    <th className='tableHeaders'> Description </th>
+                    <th className='tableHeaders' onClick={ () => this.sortEntries('ratings') }> Rating </th>
+                    <th className='tableHeaders'> Tags </th>
+                  </tr>
+                </thead>
+                <tbody>
+                {this.generateTableJSX(this.state.sortedData, start, end)}
+                </tbody>
+                </table>
+                <button onClick={nextPage}> Next </button>
+              </div>
             )}
           />
-        </table>
       </div>
     )
   }
@@ -109,14 +113,14 @@ export default withRouter(Table);
 const Ratings = (props) => {
   const rating = Number.parseInt(props.rating);
   const stars = new Array(rating).fill(0);
-  return stars.map(() => (
-    <img src={star} className='rateStars'/>
+  return stars.map((x, i) => (
+    <img key={`r${i}`} src={star} className='rateStars'/>
   ))
 };
 
 const Tags = (props) => {
   const tag = props.tag || [];
-  return tag.map((x) => (
-    <span> {`#${x}`} </span>
+  return tag.map((x, i) => (
+    <span key={`t${i}`}> {`#${x}`} </span>
   ))
 };

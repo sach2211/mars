@@ -6,25 +6,34 @@ export default class Paginator extends React.Component {
     super();
     this.state = {
       startIndex: 0,
-      endIndex: 5,
-      pager: 5,
+      endIndex: 4,
+      pager: 4,
     }
   }
 
-  nextPage() {
+  nextPage = () => {
     this.setState({ 
-      startIndex: startIndex + this.state.pager, 
-      endIndex: endIndex + this.state.pager
+      startIndex: this.state.startIndex + this.state.pager, 
+      endIndex: this.state.endIndex + this.state.pager
     })
+  }
+
+  previousPage = () => {
+    if (this.state.startIndex - this.state.pager >= 0) {
+      this.setState({ 
+        startIndex: this.state.startIndex - this.state.pager, 
+        endIndex: this.state.endIndex - this.state.pager
+      })
+    }
   }
   
   render() {
     return(
-      <tbody>
+      <div>
       {
-        this.props.render(this.state.startIndex, this.state.endIndex)
+        this.props.render(this.state.startIndex, this.state.endIndex, this.nextPage, this.previousPage)
       }
-      </tbody>
+      </div>
     );
   }
 };
