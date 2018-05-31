@@ -1,8 +1,14 @@
 import React from 'react'
 import agent from 'superagent';
 import { withRouter } from 'react-router-dom';
+
+import Paginator from '../paginator';
 import './table.css';
 import star from '../../assets/star.svg';
+
+// Styling
+
+// Card like structure for Listings.
 
 export class Table extends React.Component {
 
@@ -48,6 +54,31 @@ export class Table extends React.Component {
     this.setState({ sortedData: sortedData, sortBy: sortCol, sortOrder: sortOrd });
   }
 
+  generateTableJSX(data, start, end) {
+    const markUp = [];
+    for (let i = start; i < data.length && i < end; i++) {
+      let thisListing = null, thisRow = data[i];
+      if (data[i].isActive) {
+        thisListing = (
+          <tr key={`d-${i}`} className='tableRow'>
+            <td className='tableId'> {i + 1} </td>
+            <td className='tableThumbnail'> <img src={thisRow.image} /> </td>
+            <td className='tableName' ><h3> {thisRow.name} </h3></td>
+            <td className='tableDescription'> {thisRow.description} </td>
+            <td className='tableRatings'> 
+              <Ratings rating={thisRow.rating} />
+            </td>
+            <td className='tableTags'>
+              <Tags tag={thisRow.tags} />
+            </td>
+          </tr>
+        );
+      }
+      markUp.push(thisListing);
+    }
+    return markUp;
+  }
+
   render() {
     return(
       <div>
@@ -62,28 +93,11 @@ export class Table extends React.Component {
               <th className='tableHeaders'> Tags </th>
             </tr>
           </thead>
-          <tbody>
-          {
-            this.state.sortedData.map((thisRow, id) => (
-              thisRow.isActive ? (
-              <tr key={`d-${id}`} className='tableRow'>
-                <td className='tableId'> {id + 1} </td>
-                <td className='tableThumbnail'> <img src={thisRow.image} /> </td>
-                <td className='tableName' > {thisRow.name} </td>
-                <td className='tableDescription'> {thisRow.description} </td>
-                <td className='tableRatings'> 
-                  <Ratings rating={thisRow.rating} />
-                </td>
-                <td className='tableTags'>
-                  <Tags tag={thisRow.tags} />
-                </td>
-              </tr>
-              ) : (
-                null
-              )
-            ))
-          }
-          </tbody>
+          <Paginator
+            render= { (start, end) => (
+              this.generateTableJSX(this.state.sortedData, start, end)
+            )}
+          />
         </table>
       </div>
     )

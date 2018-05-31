@@ -1,4 +1,10 @@
-.defaults {
+body {
   font-size: 22px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.center {
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
