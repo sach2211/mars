@@ -13,10 +13,13 @@
 
 .tableDescription {
   width: 40%;
+  font-size: 15px;
+
 }
 
 .tableName .tableRatings{
   width: 20%;
+  font-size: 22px;
 }
 
 .tableId .tableRating {
@@ -25,8 +28,20 @@
 
 .tableTags {
   width: 10%;
+  color: slateblue;
 }
 
 .rateStars {
   width: 30px;
+}
+
+.hotelThumbnail {
+  width: 150px;
+  height: 150px;
+  border: 1px solid slateblue;
+  box-shadow: 1px 2px 2px cornflowerblue;
+}
+
+.ratingsHeader {
+  cursor: pointer;
 }

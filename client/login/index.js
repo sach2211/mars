@@ -11,7 +11,7 @@ export class Login extends React.Component {
     const password = this.passwordValue.value;
 
     agent
-    .post('/login')
+    .post('/api/login')
     .send({
       email: email,
       password: password
@@ -19,7 +19,7 @@ export class Login extends React.Component {
     .then( (r) => {
       if (r.body && r.body.token) {
         window.__mars_token__ = r.body.token;
-        this.props.history.push('/data');
+        this.props.history.push('/listings');
       }
     })
     .catch( e => {

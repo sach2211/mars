@@ -23,17 +23,19 @@ export class Table extends React.Component {
   }
 
   fetchData() {
-    const authToken = window && window.__mars_token__ ? window.__mars_token__ : "";
-    if (authToken) {
       agent
-      .get('/data')
-      .set({ auth:  authToken})
+      .get('/api/data')
       .then( x => {
-        this.setState({ data: x.body, sortedData: x.body })
+        console.log(x, x.body);
+        if (x.body && Array.isArray(x.body)) {
+          this.setState({ data: x.body, sortedData: x.body })
+        } else {
+          this.props.history.push('/login');
+        }
       })
-    } else {
-      this.props.history.push('/login');
-    }
+      .catch(e => {
+        console.log('call to fetch data failed - ', e);
+      })
   }
 
   componentDidMount() {
@@ -61,8 +63,12 @@ export class Table extends React.Component {
         thisListing = (
           <tr key={`d-${i}`} className='tableRow' className='inactiveListing'>
             <td className='tableId'> {i + 1} </td>
-            <td className='tableThumbnail'> <img src={thisRow.image} /> </td>
-            <td className='tableName' ><h3> {thisRow.name} </h3></td>
+            <td className='tableThumbnail'> 
+              <img src={thisRow.image} className='hotelThumbnail'/>
+            </td>
+            <td className='tableName' >
+              <h3> {thisRow.name} </h3>
+            </td>
             <td className='tableDescription'> {thisRow.description} </td>
             <td className='tableRatings'> 
               <Ratings rating={thisRow.rating} />
@@ -83,22 +89,23 @@ export class Table extends React.Component {
           <Paginator
             render= { (start, end, nextPage, previousPage) => (
               <div>
-                <button onClick={previousPage}> Prev </button>
                 <table className='dataTable'>
-                <thead>
+                <thead className='tableHeaders'>
                   <tr>
-                    <th className='tableHeaders' > No. </th>
-                    <th className='tableHeaders'> Photo </th>
-                    <th className='tableHeaders'> Name </th>
-                    <th className='tableHeaders'> Description </th>
-                    <th className='tableHeaders' onClick={ () => this.sortEntries('ratings') }> Rating </th>
-                    <th className='tableHeaders'> Tags </th>
+                    <th> No. </th>
+                    <th> Photo </th>
+                    <th> Name </th>
+                    <th> Description </th>
+                    <th className='ratingsHeader' onClick={ () => this.sortEntries('ratings') }> Rating </th>
+                    <th> Tags </th>
                   </tr>
                 </thead>
                 <tbody>
                 {this.generateTableJSX(this.state.sortedData, start, end)}
                 </tbody>
                 </table>
+                <button onClick={previousPage}> Prev </button>
+                <span> Page x of y </span>
                 <button onClick={nextPage}> Next </button>
               </div>
             )}

@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const randomToken = require('random-token');
 const cors = require('cors');
 const path = require('path');
@@ -12,9 +13,18 @@ const mockData = require('../mock-data.json')
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', (req, res) => {
+  res.redirect('/login');
+})
+
+app.get('/login', (req, res) => {
+  res.sendFile (path.join(__dirname, '../public/index.html'));
+})
+
+app.get('/listings', (req, res) => {
   res.sendFile (path.join(__dirname, '../public/index.html'));
 })
 
@@ -24,7 +34,7 @@ app.get('/ping', (req, res) => {
 })
 
 // login route
-app.post("/login", (req, res) => {
+app.post("/api/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
@@ -39,6 +49,7 @@ app.post("/login", (req, res) => {
     }
   })
   .then((randToken) => {
+    res.cookie('__tk__', randToken, {maxAge: 10 * 60 * 1000, httpOnly: true});
     res.status(200).send({
       token : randToken
     });
@@ -54,8 +65,8 @@ app.post("/login", (req, res) => {
 });
 
 // supply data to user if correct token is supplied
-app.get('/data', (req, res) => {
-  const postedToken = req.headers.auth;
+app.get('/api/data', (req, res) => {
+  const postedToken = req.cookies.__tk__ || '';
   const validity = verifyToken(postedToken);
 
   if (validity)
@@ -64,8 +75,8 @@ app.get('/data', (req, res) => {
     res.redirect('/login');
 });
 
-app.get('*', (req, res) => {
-  res.sendFile (path.join(__dirname, '../public/index.html'));
+app.get('*' , (req, res) => {
+  res.status(404).send('Wrong URL maybe ? ');
 })
 
 

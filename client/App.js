@@ -12,7 +12,8 @@ export default class App extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route path='/login' component={Login} />
-            <Route path='/data' component={Table} />
+            <Route path='/listings' component={Table} />
+            <Route path='/listings' component={Login} />
           </Switch>
         </BrowserRouter>
       </div>
