@@ -50,7 +50,7 @@ th, td {
 
 .hotelThumbnail {
   width: 150px;
-  height: 150px;
+  height: 140px;
   border: 1px solid slateblue;
   box-shadow: 1px 2px 2px cornflowerblue;
 }
@@ -74,4 +74,20 @@ th, td {
   height: 60px;
   vertical-align: middle;
   background-color: lavender;
+}
+
+.pagerButtons {
+  background: aliceblue;
+  border: 1px solid mediumblue;
+  border-radius: 2px;
+  height: 25px;
+  width: 77px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.paginationData {
+  position: absolute;
+  bottom: 20px;
+  left: 42%;
 }

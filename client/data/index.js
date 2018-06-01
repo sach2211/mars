@@ -115,9 +115,19 @@ export class Table extends React.Component {
                 {this.generateTableJSX(this.state.sortedData, start, end)}
                 </tbody>
                 </table>
-                <button onClick={previousPage}> Prev </button>
-                <span> Page x of y </span>
-                <button onClick={nextPage}> Next </button>
+                <div className='paginationData'>
+                  <button 
+                    className='pagerButtons'
+                    onClick={previousPage}> 
+                    Prev
+                  </button>
+                  <span> Page x of y </span>
+                  <button 
+                    className='pagerButtons'
+                    onClick={nextPage}> 
+                      Next 
+                  </button>
+                </div>
               </div>
             )}
           />
