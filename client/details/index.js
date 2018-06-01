@@ -17,7 +17,12 @@ export class Details extends React.Component {
     }
   }
 
+  componentWillMount() {
+    console.log('Component will mount');
+  }
+
   fetchData(hotelId) {
+    console.log('Fetching data for = ', hotelId)
     agent
     .get(`/api/hotel/${hotelId}`)
     .then( x => {
@@ -33,7 +38,7 @@ export class Details extends React.Component {
   }
 
   componentDidMount() {
-    const hotelId =  this.props.match.params.hotelId;
+    const hotelId =  this.props.match.params.id || 0;
     this.fetchData(hotelId);
   }
   

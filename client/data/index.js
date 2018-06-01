@@ -75,14 +75,18 @@ export class Table extends React.Component {
             <td className='tableDescription'> 
               {thisRow.description} 
             </td>
-            <td className='tableRatings'> 
+            <td className='tableRatings'>
               <Ratings rating={thisRow.rating} />
             </td>
             <td className='tableTags'>
               <Tags tag={thisRow.tags} />
             </td>
             <td>
-              <button onClick={() => this.onHotelClick(i)}> Book Now </button>
+              {
+                thisRow.isActive ? (
+                  <button onClick={() => this.onHotelClick(i)} className='bookNowButton'> Book Now </button>
+                ) : null
+              }
             </td>
           </tr>
         );
@@ -117,6 +121,7 @@ export class Table extends React.Component {
                       }
                     </th>
                     <th className='header'> Tags </th>
+                    <th className='header'> Actions </th>
                   </tr>
                 </thead>
                 <tbody>
