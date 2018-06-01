@@ -61,7 +61,6 @@ export class Table extends React.Component {
       let thisListing = null, thisRow = data[i];
         thisListing = (
           <tr key={`d-${i}`} className={`${thisRow.isActive ? '' : 'inactiveListing'}`}>
-            <td className='tableId'> {i + 1} </td>
             <td className='tableThumbnail'> 
               <img src={thisRow.image} className='hotelThumbnail'/>
             </td>
@@ -98,12 +97,18 @@ export class Table extends React.Component {
                 <table className='dataTable'>
                 <thead className='tableHeaders'>
                   <tr>
-                    <th> No. </th>
-                    <th> Photo </th>
-                    <th> Name </th>
-                    <th> Description </th>
-                    <th className='ratingsHeader' onClick={ () => this.sortEntries('ratings') }> Rating </th>
-                    <th> Tags </th>
+                    <th className='header'> Photo </th>
+                    <th className='header'> Name </th>
+                    <th className='header'> Description </th>
+                    <th className='ratingsHeader header' onClick={ () => this.sortEntries('ratings') }> 
+                      Rating
+                      {
+                        this.state.sortBy === 'ratings' ? (
+                          this.state.sortOrder ? '▲' : '▼'
+                        ) : ''
+                      }
+                    </th>
+                    <th className='header'> Tags </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -126,9 +131,13 @@ export default withRouter(Table);
 const Ratings = (props) => {
   const rating = Number.parseInt(props.rating);
   const stars = new Array(rating).fill(0);
-  return stars.map((x, i) => (
+  const hotelStars = stars.map((x, i) => (
     <img key={`r${i}`} src={star} className='rateStars'/>
-  ))
+  ));
+  if (hotelStars.length === 0) {
+    hotelStars.push(<div> NA </div>);
+  }
+  return hotelStars;
 };
 
 const Tags = (props) => {

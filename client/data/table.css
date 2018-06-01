@@ -2,10 +2,26 @@
   width: 1200px;
   border-collapse: collapse;
   border: 1px solid darkmagenta;
+  table-layout: fixed;
+}
+
+.dataTable th:nth-child(1) {
+  width: 20%;
+}
+.dataTable th:nth-child(2),
+.dataTable th:nth-child(4) {
+  width: 15%;
+}
+.dataTable th:nth-child(3) {
+  width: 40%;
+}
+.dataTable th:nth-child(5) {
+  width: 10%;
 }
 
 th, td {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #ddd;
+  padding: 2px 4px 2px 4px;  
 }
 
 .tableHeaders {
@@ -13,23 +29,19 @@ th, td {
 }
 
 .tableDescription {
-  width: 40%;
   font-size: 15px;
-
 }
 
 .tableName .tableRatings{
-  width: 20%;
   font-size: 22px;
 }
 
-.tableId .tableRating {
+.tableId {
   width: 5%;
 }
 
 .tableTags {
-  width: 10%;
-  color: slateblue;
+  color: slateblue;;
 }
 
 .rateStars {
@@ -56,4 +68,10 @@ th, td {
 .unavailableHotel {
   font-size: 16px;
   color: red;
+}
+
+.header {
+  height: 60px;
+  vertical-align: middle;
+  background-color: lavender;
 }
