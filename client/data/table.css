@@ -1,14 +1,15 @@
 .dataTable {
   width: 1200px;
+  border-collapse: collapse;
   border: 1px solid darkmagenta;
+}
+
+th, td {
+  border-bottom: 1px solid black;
 }
 
 .tableHeaders {
   text-align: left;
-}
-
-.tableRow {
-  border: 1px solid grey;
 }
 
 .tableDescription {
@@ -44,4 +45,15 @@
 
 .ratingsHeader {
   cursor: pointer;
+}
+
+.inactiveListing {
+  background-color: ghostwhite;
+  color: grey;
+  opacity: .4;
+}
+
+.unavailableHotel {
+  font-size: 16px;
+  color: red;
 }

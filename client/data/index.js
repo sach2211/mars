@@ -26,7 +26,6 @@ export class Table extends React.Component {
       agent
       .get('/api/data')
       .then( x => {
-        console.log(x, x.body);
         if (x.body && Array.isArray(x.body)) {
           this.setState({ data: x.body, sortedData: x.body })
         } else {
@@ -61,15 +60,22 @@ export class Table extends React.Component {
     for (let i = start; i < data.length && i < end; i++) {
       let thisListing = null, thisRow = data[i];
         thisListing = (
-          <tr key={`d-${i}`} className='tableRow' className='inactiveListing'>
+          <tr key={`d-${i}`} className={`${thisRow.isActive ? '' : 'inactiveListing'}`}>
             <td className='tableId'> {i + 1} </td>
             <td className='tableThumbnail'> 
               <img src={thisRow.image} className='hotelThumbnail'/>
             </td>
             <td className='tableName' >
               <h3> {thisRow.name} </h3>
+              {
+                !thisRow.isActive ? (
+                  <div className='unavailableHotel'> Unavailable </div>
+                ) : null
+              }
             </td>
-            <td className='tableDescription'> {thisRow.description} </td>
+            <td className='tableDescription'> 
+              {thisRow.description} 
+            </td>
             <td className='tableRatings'> 
               <Ratings rating={thisRow.rating} />
             </td>
