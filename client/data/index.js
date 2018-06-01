@@ -81,11 +81,18 @@ export class Table extends React.Component {
             <td className='tableTags'>
               <Tags tag={thisRow.tags} />
             </td>
+            <td>
+              <button onClick={() => this.onHotelClick(i)}> Book Now </button>
+            </td>
           </tr>
         );
       markUp.push(thisListing);
     }
     return markUp;
+  }
+
+  onHotelClick(no) {
+    this.props.history.push(`/hotel/${no}`)
   }
 
   render() {
@@ -127,11 +134,12 @@ export class Table extends React.Component {
 
 export default withRouter(Table);
 
-const Ratings = (props) => {
+export const Ratings = (props) => {
   const rating = Number.parseInt(props.rating);
   const stars = new Array(rating).fill(0);
+  const icon = props.icon || star;
   const hotelStars = stars.map((x, i) => (
-    <img key={`r${i}`} src={star} className='rateStars'/>
+    <img key={`r${i}`} src={icon} className='rateStars'/>
   ));
   if (hotelStars.length === 0) {
     hotelStars.push(<div> NA </div>);
@@ -147,7 +155,6 @@ const Tags = (props) => {
 };
 
 const PrevButton = ({ start, previousPage }) => {
-  console.log('Start value received = ', start);
   if (start > 0) {
     return (
       <button 
@@ -161,7 +168,6 @@ const PrevButton = ({ start, previousPage }) => {
 }
 
 const EndButton = ({ end, data, nextPage }) => {
-  console.log('End value received = ', end);
   if (end < data) {
     return (
       <button 

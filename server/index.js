@@ -28,6 +28,10 @@ app.get('/listings', (req, res) => {
   res.sendFile (path.join(__dirname, '../public/index.html'));
 })
 
+app.get('/hotel/:hotelId', (req, res) => {
+  res.sendFile (path.join(__dirname, '../public/index.html'));
+})
+
 // Health check route
 app.get('/ping', (req, res) => {
   res.send('pong');
@@ -71,6 +75,17 @@ app.get('/api/data', (req, res) => {
 
   if (validity)
     res.send(mockData);
+  else
+    res.redirect('/login');
+});
+
+app.get('/api/hotel/:hotelId', (req, res) => {
+  const postedToken = req.cookies.__tk__ || '';
+  const validity = verifyToken(postedToken);
+  const hotel = Number.parseInt(req.params.hotelId);
+
+  if (validity)
+    res.send(mockData[hotel]);
   else
     res.redirect('/login');
 });

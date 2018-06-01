@@ -1,0 +1,35 @@
+.imageSection {
+  display: inline-block;
+  width: 35%;
+}
+
+.dataSection {
+  display: inline-block;
+  width: 65%;
+}
+
+.hotelImage {
+  border: 2px solid black;
+  border-radius: 4px;
+  box-shadow: 2px 2px 1px grey;
+}
+
+.hotelName {
+  color: darkblue;
+}
+
+.bookButton {
+  background: aliceblue;
+  border: 2px solid mediumblue;
+  border-radius: 5px;
+  height: 40px;
+  width: 120px;
+  margin: 15px 5px 15px 5px;
+  padding: 5px 2px 5px 2px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.rate {
+  width: 40px;
+}
