@@ -33,7 +33,7 @@ export class Login extends React.Component {
         <h2> Welcome </h2>
         <form onSubmit={this.submitLoginForm} className='loginForm'>
           <input 
-            placeholder="E Mail"
+            placeholder="Username"
             ref={ email => this.emailValue = email }
             className='formInputs' />
           <br />

@@ -1,21 +1,33 @@
 .loginBox {
   position: absolute;
-  width: 500px;  
+  width: 500px;
   top: 30%;
   left: 30%;
-  border: 1px dotted grey;
+  border: 1px solid slateblue;
+  padding: 20px;
+  background: floralwhite;
 }
 
 .submitButton {
   width: 100%;
   font-size: 22px;
-  background-color: lightblue;
+  background-color: lavender;
+  margin: 15px 0px 5px 0;
+  border: 2px solid slateblue;
+  border-radius: 4px;
+  height: 45px;
+
 }
 
 .loginFormHeader {
+  color: firebrick;
 }
 
 .formInputs {
   width: 100%;
   font-size: 22px;
+  border: none;
+  outline: none;
+  padding: 5px;
+  margin: 5px;
 }
