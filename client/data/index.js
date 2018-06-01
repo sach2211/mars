@@ -94,6 +94,7 @@ export class Table extends React.Component {
           <Paginator
             render= { (start, end, nextPage, previousPage) => (
               <div>
+                <PrevButton start={start} previousPage={previousPage} />
                 <table className='dataTable'>
                 <thead className='tableHeaders'>
                   <tr>
@@ -115,19 +116,7 @@ export class Table extends React.Component {
                 {this.generateTableJSX(this.state.sortedData, start, end)}
                 </tbody>
                 </table>
-                <div className='paginationData'>
-                  <button 
-                    className='pagerButtons'
-                    onClick={previousPage}> 
-                    Prev
-                  </button>
-                  <span> Page x of y </span>
-                  <button 
-                    className='pagerButtons'
-                    onClick={nextPage}> 
-                      Next 
-                  </button>
-                </div>
+                <EndButton end={end} nextPage={nextPage} data={this.state.data.length}/>
               </div>
             )}
           />
@@ -156,3 +145,31 @@ const Tags = (props) => {
     <span key={`t${i}`}> {`#${x}`} </span>
   ))
 };
+
+const PrevButton = ({ start, previousPage }) => {
+  console.log('Start value received = ', start);
+  if (start > 0) {
+    return (
+      <button 
+        className='prevButton'
+        onClick={previousPage}> 
+        Prev
+      </button>
+    )
+  }
+  return null;
+}
+
+const EndButton = ({ end, data, nextPage }) => {
+  console.log('End value received = ', end);
+  if (end < data) {
+    return (
+      <button 
+        className='nextButton'
+        onClick={nextPage}> 
+        Next
+      </button>
+    )
+  }
+  return null;
+}

@@ -76,7 +76,10 @@ th, td {
   background-color: lavender;
 }
 
-.pagerButtons {
+.prevButton {
+  position: absolute;
+  left: 10px;
+  top: 45%;
   background: aliceblue;
   border: 1px solid mediumblue;
   border-radius: 2px;
@@ -86,8 +89,15 @@ th, td {
   cursor: pointer;
 }
 
-.paginationData {
+.nextButton {
   position: absolute;
-  bottom: 20px;
-  left: 42%;
+  right: 10px;
+  top: 45%;
+  background: aliceblue;
+  border: 1px solid mediumblue;
+  border-radius: 2px;
+  height: 25px;
+  width: 77px;
+  font-size: 16px;
+  cursor: pointer;
 }
